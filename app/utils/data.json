@@ -1,0 +1,65 @@
+{
+    "mancha": {
+      "title": "Mancha",
+      "description": "Lesión plana no palpable con cambio de coloración en la piel, <1cm de diámetro",
+      "characteristics": [
+        "Sin relieve",
+        "Bordes definidos o difusos",
+        "No altera textura de la piel"
+      ],
+      "diagnosticos_diferenciales": [
+        "Efélide (peca)",
+        "Lentigo",
+        "Melanoma in situ"
+      ],
+      "treatment": ""
+    },
+    
+    "pustula": {
+      "title": "Pústula",
+      "description": "Elevación epidérmica llena de pus, generalmente de origen infeccioso",
+      "characteristics": [
+        "Contenido purulento visible",
+        "Base eritematosa",
+        "Tamaño <5mm"
+      ],
+      "diagnosticos_diferenciales": [
+        "Foliculitis",
+        "Acné pustuloso",
+        "Impétigo"
+      ],
+      "treatment": ""
+    },
+  
+    "roncha": {
+      "title": "Roncha",
+      "description": "Lesión edematosa transitoria de la dermis, secundaria a liberación de histamina",
+      "characteristics": [
+        "Palpable",
+        "Pruriginosa",
+        "Duración <24h"
+      ],
+      "diagnosticos_diferenciales": [
+        "Urticaria",
+        "Picadura de insecto",
+        "Dermografismo"
+      ],
+      "treatment": ""
+    },
+  
+    "ampolla": {
+      "title": "Ampolla",
+      "description": "Elevación llena de líquido seroso entre capas de la epidermis",
+      "characteristics": [
+        "Contenido claro o hemorrágico",
+        "Tamaño >5mm",
+        "Puede ser tensa o flácida"
+      ],
+      "diagnosticos_diferenciales": [
+        "Quemadura de segundo grado",
+        "Dermatitis de contacto",
+        "Penfigoide ampollar"
+      ],
+      "treatment": ""
+    }
+  } 

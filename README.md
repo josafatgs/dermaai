@@ -1,40 +1,43 @@
-# Welcome to Remix!
+# DermaAI Frontend
 
-- 📖 [Remix docs](https://remix.run/docs)
+Este proyecto es una aplicación web que identifica 4 tipos de lesiones cútaneas primarias (Mancha, Ampolla, Pústula, Roncha) utilizando el framework Remix que emplea el lenguaje Typescript 
 
-## Development
+## Requisitos previos
 
-Run the dev server:
+Antes de ejecutar el proyecto, asegurese de tener instalados los siguientes programas:
 
-```shellscript
+- [Node.js](https://nodejs.org/) (incluye npm).
+
+## Instalación y configuración
+
+### 1. Descargar el proyecto
+
+Descarga el archivo ZIP de este proyecto y descomprímelo en tu máquina.
+
+### 2. Navegar al directorio del proyecto
+
+Una vez que hayas descomprimido el archivo, abre una terminal y navega al directorio raíz del proyecto:
+
+bash
+cd /ruta/donde/descomprimiste/dermaai
+
+
+### 3. Instalar dependencias
+
+Dentro del directorio del proyecto, ejecuta el siguiente comando para instalar todas las dependencias necesarias:
+
+bash
+npm install
+
+Este comando instalará las dependencias del proyecto, que son necesarias para ejecutar el código dentro de la máquina local directamente.
+
+### 4. Ejecutar el proyecto
+Después de instalar las dependencias, puedes ejecutar el programa usando el siguiente comando:
+
+ bash
 npm run dev
-```
 
-## Deployment
+Este comando ejecutará el código de la interfaz web dentro de la siguiente ruta:
 
-First, build your app for production:
-
-```sh
-npm run build
-```
-
-Then run the app in production mode:
-
-```sh
-npm start
-```
-
-Now you'll need to pick a host to deploy it to.
-
-### DIY
-
-If you're familiar with deploying Node applications, the built-in Remix app server is production-ready.
-
-Make sure to deploy the output of `npm run build`
-
-- `build/server`
-- `build/client`
-
-## Styling
-
-This template comes with [Tailwind CSS](https://tailwindcss.com/) already configured for a simple default starting experience. You can use whatever css framework you prefer. See the [Vite docs on css](https://vitejs.dev/guide/features.html#css) for more information.
+ bash
+http://localhost:5153
