@@ -8,7 +8,7 @@ import type { ClassificationResponse } from "~/types/ClassificationResponse";
 
 interface FileUploadProps {
 	handleResult: (image: string, results: ClassificationResult) => void;
-	handleSubmit: () => void;
+	handleSubmit: (e: React.FormEvent) => void;
 	handleSetFile: (obj: File | null) => void;
 }
 

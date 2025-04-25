@@ -32,20 +32,44 @@ export default function Classifier() {
 			e.preventDefault();
 			if (!file) return;
 	
-			fetcher.submit(
-				(() => {
-					const formData = new FormData();
-					formData.append("image-to-clasify", file);
-					return formData;
-				})(),
-				{
-					method: "post",
-					action: "classify"
+			// fetcher.submit(
+			// 	(() => {
+			// 		const formData = new FormData();
+			// 		formData.append("image-to-clasify", file);
+			// 		formData.append("action", "classify");
+			// 		return formData;
+			// 	})(),
+			// 	{
+			// 		method: "post"
+			// 	}
+			// );
+
+			const formData = new FormData();
+			formData.append('image-to-clasify', file);
+
+			fetch("http://18.216.51.169:5000/classify", {
+			//fetch("https://51b9-18-216-51-169.ngrok-free.app/classify", {
+				method: 'POST',
+				mode: 'cors',
+				body: formData
+			})
+			.then(response => {
+				if (!response.ok) {
+					throw new Error(`HTTP error! status: ${response.status}`);
 				}
-			);
-			const response = await fetcher.data;
+				return {
+					message: response.json(),
+					status: 200
+				}
+			})
+			.catch(error => {
+				console.error('Error classifying image:', error);
+				return {
+					message: error.message,
+					status: 500
+				};
+			});
 			
-			console.log(response);
 		};
 
 	return (
@@ -153,11 +177,11 @@ export default function Classifier() {
 						<Result
 							classificationResult={results}
 							originalImage={resultImage}
-							handelSubmit={handleSubmit}
-							handleSetFile={handleSetFile}
+							
 						/>
 					) : (
-						<FileUpload handleResult={handleSetResults}  />
+						<FileUpload handleResult={handleSetResults} handleSubmit={handleSubmit}
+						handleSetFile={handleSetFile}  />
 					)}
 				</div>
 				<ClasificationHistory></ClasificationHistory>
@@ -166,21 +190,23 @@ export default function Classifier() {
 	);
 }
 
-export const action: ActionFunction = async ({ request, params }) => {
-	const formData = await request.formData();
-	const action = formData.get("action");
+// export const action: ActionFunction = async ({ request, params }) => {
+// 	const formData = await request.formData();
+// 	const action = formData.get("action");
 
-	if (action == "classify") {
-		const file = formData.get("image-to-clasify");
-		if (!file) {
-			return { error: "No file provided" };
-		}
+// 	console.log("action", action);
 
-		const response = await classifyImage(file);
 
-		return response;
-	}
+// 	try {
+// 		if (action === "classify") {
+// 			const image = formData.get("image-to-clasify") as Blob;
+// 			const result = await classifyImage(image);
+// 			return result;
+// 		}
+// 	} catch (error) {
+// 		console.error("Error in action:", error);
+// 		return null;
+// 	}
 
-	return {"message": "hola"}
-}
+// }
 
