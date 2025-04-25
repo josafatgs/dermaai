@@ -9,6 +9,42 @@ const Result = ({ classificationResult, originalImage }: { classificationResult:
 
 	console.log(data);
 
+	console.log(classificationResult);
+
+	const [predictedLession, setPredictedLession] = useState<String | null>(null);
+	const [lessionDescription, setLesionDescription] = useState<any | null>(null);
+
+	useEffect(() => {
+		if (classificationResult) {
+			if ( classificationResult.predictedClass === "Ampolla") {
+				console.log(data.ampolla);
+				setLesionDescription(data.ampolla);
+				setPredictedLession("Ampolla");
+			} else if (classificationResult.predictedClass === "Mancha") {
+				console.log(data.mancha)
+				setLesionDescription(data.mancha);
+				setPredictedLession("Mancha");
+			}
+			else if (classificationResult.predictedClass === "Pustula") {
+				console.log(data.pustula);
+				setLesionDescription(data.pustula);
+				setPredictedLession("Pustula");
+			}
+			else if (classificationResult.predictedClass === "Roncha") {
+				console.log(data.roncha);
+				setLesionDescription(data.roncha);
+				setPredictedLession("Roncha");
+			}
+		}
+	}, [classificationResult]);
+
+	useEffect(() => {
+		if (lessionDescription) {
+			console.log(lessionDescription);
+		}
+	}
+	, [lessionDescription]);
+
 	const similarImages = Array.from({length: 4}, (_, i) => ({
 		id: i + 1,
 		url: `/${classificationResult.predictedClass.toLowerCase()}/${classificationResult.predictedClass.toLowerCase()}${i + 1}.jpg`,
@@ -32,12 +68,8 @@ const Result = ({ classificationResult, originalImage }: { classificationResult:
 		);
 	};
 
-	// Datos de ejemplo para la descripción de la lesión
-	const lesionDescription = data[classificationResult.predictedClass.toLowerCase()] || {
-		diagnosticos_diferenciales: "Descripción no disponible",
-		definicion: "No se encontró información sobre esta lesión.",
-		caracteristicas: ["N/A"],
-	};
+	
+
 
 	return (
 		<div
@@ -93,7 +125,7 @@ const Result = ({ classificationResult, originalImage }: { classificationResult:
 								color: "#9B59B6",
 							}}
 						>
-							9%
+							{ classificationResult.Mancha }%
 						</div>
 					</div>
 
@@ -119,7 +151,7 @@ const Result = ({ classificationResult, originalImage }: { classificationResult:
 								color: "#E74C3C",
 							}}
 						>
-							10%
+							{ classificationResult.Pustula }%
 						</div>
 					</div>
 
@@ -145,7 +177,7 @@ const Result = ({ classificationResult, originalImage }: { classificationResult:
 								color: "#3498DB",
 							}}
 						>
-							9%
+							{ classificationResult.Roncha }%
 						</div>
 					</div>
 
@@ -171,7 +203,7 @@ const Result = ({ classificationResult, originalImage }: { classificationResult:
 								color: "#2ECC71",
 							}}
 						>
-							9%
+							{ classificationResult.Ampolla }%
 						</div>
 					</div>
 				</div>
@@ -186,7 +218,7 @@ const Result = ({ classificationResult, originalImage }: { classificationResult:
 					}}
 				>
 					<h3 style={{ margin: "0", color: "#3A7BD5" }}>
-						Clase Predicha: <strong>Pústula</strong>
+						Clase Predicha: <strong>{ predictedLession }</strong>
 					</h3>
 				</div>
 			</div>
@@ -211,8 +243,7 @@ const Result = ({ classificationResult, originalImage }: { classificationResult:
 				>
 					<img
 						src={
-							originalImage ||
-							"https://images.unsplash.com/photo-1582058091505-f87a2e55a40f?w=500"
+							originalImage
 						}
 						alt="Lesión clasificada"
 						style={{
@@ -225,31 +256,31 @@ const Result = ({ classificationResult, originalImage }: { classificationResult:
 
 				<div>
 					<h3 style={{ color: "#3A7BD5", marginTop: "0" }}>
-						{lesionDescription.title}
+						{ lessionDescription?.title }
 					</h3>
 					<p style={{ lineHeight: "1.6", marginBottom: "20px" }}>
-						{lesionDescription.description}
+						{ lessionDescription?.description }
 					</p>
 
 					<h4 style={{ color: "#495057" }}>
 						Características principales:
 					</h4>
 					<ul style={{ paddingLeft: "20px", marginBottom: "20px" }}>
-						{lesionDescription.characteristics.map(
-							(item, index) => (
-								<li key={index} style={{ marginBottom: "8px" }}>
-									{item}
-								</li>
-							)
-						)}
+						{ lessionDescription?.characteristics.map((item: string, index: number) => (
+								<li
+								key={index}
+								style={{
+									marginBottom: "10px",
+									color: "#555",
+									fontSize: "0.9em",
+								}}
+							>
+								{item}
+							</li>
+						))}
 					</ul>
 
-					<h4 style={{ color: "#495057" }}>
-						Tratamiento recomendado:
-					</h4>
-					<p style={{ lineHeight: "1.6" }}>
-						{lesionDescription.treatment}
-					</p>
+				
 				</div>
 			</div>
 

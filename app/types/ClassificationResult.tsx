@@ -4,7 +4,5 @@ export interface ClassificationResult {
     Pustula: number;
     Roncha: number;
     Ampolla: number;
-    predictedClass: 'Mancha' | 'Pustula' | 'Roncha' | 'Ampolla';
-    confidence?: number; // Opcional: nivel de confianza general
-    description?: string; // Opcional: descripción adicional
+    predictedClass: string;
   }

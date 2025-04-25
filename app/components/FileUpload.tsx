@@ -2,7 +2,6 @@ import React, { useState, useCallback } from "react";
 import { MdOutlineFileUpload, MdClose } from "react-icons/md";
 import { Form, useFetcher } from "@remix-run/react";
 import type { ClassificationResult } from "~/types/ClassificationResult";
-import type { ClassificationResponse } from "~/types/ClassificationResponse";
 
 
 
