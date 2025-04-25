@@ -1,14 +1,19 @@
-import { useState, useCallback } from "react";
+import React, { useState, useCallback } from "react";
 import { MdOutlineFileUpload, MdClose } from "react-icons/md";
-import { useFetcher } from "@remix-run/react";
+import { Form, useFetcher } from "@remix-run/react";
 import type { ClassificationResult } from "~/types/ClassificationResult";
 import type { ClassificationResponse } from "~/types/ClassificationResponse";
 
+
+
 interface FileUploadProps {
 	handleResult: (image: string, results: ClassificationResult) => void;
+	handleSubmit: () => void;
+	handleSetFile: (obj: File | null) => void;
 }
 
-const FileUpload = ({ handleResult }: FileUploadProps) => {
+const FileUpload = ({ handleResult, handleSubmit, handleSetFile }: FileUploadProps) => {
+
 	const [file, setFile] = useState<File | null>(null);
 	const [isDragActive, setIsDragActive] = useState(false);
 	const fetcher = useFetcher();
@@ -40,6 +45,7 @@ const FileUpload = ({ handleResult }: FileUploadProps) => {
 			const uploadedFile = e.dataTransfer.files[0];
 			if (uploadedFile.type.match("image.*")) {
 				setFile(uploadedFile);
+				handleSetFile(uploadedFile);
 				setPreviewUrl(URL.createObjectURL(uploadedFile));
 			}
 		}
@@ -50,6 +56,7 @@ const FileUpload = ({ handleResult }: FileUploadProps) => {
 			const uploadedFile = e.target.files[0];
 			if (uploadedFile.type.match("image.*")) {
 				setFile(uploadedFile);
+				handleSetFile(uploadedFile);
 				setPreviewUrl(URL.createObjectURL(uploadedFile));
 			}
 		}
@@ -57,6 +64,7 @@ const FileUpload = ({ handleResult }: FileUploadProps) => {
 
 	const removeFile = () => {
 		setFile(null);
+		handleSetFile(null);
 		setPreviewUrl(null);
 		if (previewUrl) {
 			URL.revokeObjectURL(previewUrl);
@@ -71,17 +79,9 @@ const FileUpload = ({ handleResult }: FileUploadProps) => {
 		return parseFloat((bytes / Math.pow(k, i)).toFixed(2)) + " " + sizes[i];
 	};
 
-	const handleSubmit = async (e: React.FormEvent) => {
-		e.preventDefault();
-		if (!file) return;
-
-		fetcher.submit(
-			
-
-	};
 
 	return (
-		<fetcher.Form
+		<Form
 			method="post"
 			encType="multipart/form-data"
 			onSubmit={handleSubmit}
@@ -221,13 +221,10 @@ const FileUpload = ({ handleResult }: FileUploadProps) => {
 				{fetcher.state === "submitting" ? "Procesando..." : "Evaluar"}
 			</button>
 
-			{fetcher.data?.error && (
-				<div style={{ color: "red", marginTop: "10px" }}>
-					Error: {fetcher.data.error}
-				</div>
-			)}
-		</fetcher.Form>
+			
+		</Form>
 	);
 };
 
 export default FileUpload;
+

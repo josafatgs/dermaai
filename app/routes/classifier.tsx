@@ -1,6 +1,9 @@
 import FileUpload from "~/components/FileUpload";
 import ClasificationHistory from "~/components/ClasificationHistory";
 import Result from "~/components/Result";
+import { classifyImage } from "~/server/Classifier.server";
+import type { ActionFunction } from "@remix-run/node";
+import { useFetcher } from "@remix-run/react";
 
 
 import { useState } from "react";
@@ -10,14 +13,40 @@ import { ClassificationResult } from "~/types/ClassificationResult";
 
 export default function Classifier() {
 
-
+	const fetcher = useFetcher();
 	const [results, setResults] = useState<ClassificationResult | null>(null);
 	const [resultImage, setResultImage] = useState<string | null>(null);
+
+	const [file, setFile] = useState<File | null>(null);
+
+	const handleSetFile = (obj: File | null) => {
+		setFile(obj);
+	}
 
 	const handleSetResults = (image: string, results: ClassificationResult) => {
 		setResultImage(image);
 		setResults(results);
 	};
+
+	const handleSubmit = async (e: React.FormEvent) => {
+			e.preventDefault();
+			if (!file) return;
+	
+			fetcher.submit(
+				(() => {
+					const formData = new FormData();
+					formData.append("image-to-clasify", file);
+					return formData;
+				})(),
+				{
+					method: "post",
+					action: "classify"
+				}
+			);
+			const response = await fetcher.data;
+			
+			console.log(response);
+		};
 
 	return (
 		<div
@@ -124,9 +153,11 @@ export default function Classifier() {
 						<Result
 							classificationResult={results}
 							originalImage={resultImage}
+							handelSubmit={handleSubmit}
+							handleSetFile={handleSetFile}
 						/>
 					) : (
-						<FileUpload handleResult={handleSetResults} />
+						<FileUpload handleResult={handleSetResults}  />
 					)}
 				</div>
 				<ClasificationHistory></ClasificationHistory>
@@ -134,3 +165,22 @@ export default function Classifier() {
 		</div>
 	);
 }
+
+export const action: ActionFunction = async ({ request, params }) => {
+	const formData = await request.formData();
+	const action = formData.get("action");
+
+	if (action == "classify") {
+		const file = formData.get("image-to-clasify");
+		if (!file) {
+			return { error: "No file provided" };
+		}
+
+		const response = await classifyImage(file);
+
+		return response;
+	}
+
+	return {"message": "hola"}
+}
+
