@@ -183,6 +183,7 @@ export default function Classifier() {
         title="¿Como usar la herramienta?"
       >
         <p>Mira lo sencillo que es usar nuestra app!</p>
+        <img src="GIFACTION.gif" alt="help-gif" width="100%"/>
         <div className="mt-4">
           <button
             onClick={() => setIsModalOpen(false)}
