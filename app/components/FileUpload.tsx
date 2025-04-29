@@ -1,18 +1,14 @@
 import React, { useState, useCallback } from "react";
 import { MdOutlineFileUpload, MdClose } from "react-icons/md";
 import { Form, useFetcher } from "@remix-run/react";
-import type { ClassificationResult } from "~/types/ClassificationResult";
-
 
 
 interface FileUploadProps {
-	handleResult: (image: string, results: ClassificationResult) => void;
 	handleSubmit: (e: React.FormEvent) => void;
 	handleSetFile: (obj: File | null) => void;
 }
 
-const FileUpload = ({ handleResult, handleSubmit, handleSetFile }: FileUploadProps) => {
-
+const FileUpload = ({ handleSubmit, handleSetFile }: FileUploadProps) => {
 	const [file, setFile] = useState<File | null>(null);
 	const [isDragActive, setIsDragActive] = useState(false);
 	const fetcher = useFetcher();
@@ -86,82 +82,48 @@ const FileUpload = ({ handleResult, handleSubmit, handleSetFile }: FileUploadPro
 			onSubmit={handleSubmit}
 		>
 			<div
-				style={{
-					borderRadius: "15px",
-					padding: "15px",
-					border: isDragActive
-						? "2px solid #3A7BD5"
-						: "2px dotted #3A7BD5",
-					display: "flex",
-					justifyContent: "center",
-					alignItems: "center",
-					flexDirection: "column",
-					backgroundColor: isDragActive ? "#f0f7ff" : "transparent",
-					position: "relative",
-					cursor: "pointer",
-					height: "100%",
-					margin: "10px",
-				}}
+				className={`upload-container ${isDragActive ? 'drag-active' : ''}`}
 				onDragEnter={onDragEnter}
 				onDragLeave={onDragLeave}
 				onDragOver={onDragOver}
 				onDrop={onDrop}
 				onClick={() => document.getElementById("file-input")?.click()}
+				onKeyDown={(e) => {
+					if (e.key === "Enter" || e.key === " ") {
+						e.preventDefault();
+						document.getElementById("file-input")?.click();
+					}
+				}}
+				role="button"
+				tabIndex={0}
 			>
 				<input
 					id="file-input"
 					type="file"
 					name="image-to-clasify"
 					accept="image/jpeg, image/png"
-					style={{ display: "none" }}
+					className="file-input"
 					onChange={handleFileChange}
 				/>
 
 				{!file ? (
 					<>
-						<MdOutlineFileUpload
-							style={{
-								fontSize: "2em",
-								color: "#3A7BD5",
-								marginBottom: "10px",
-							}}
-						/>
-						<p
-							style={{
-								margin: 0,
-								color: "#3A7BD5",
-								textAlign: "center",
-							}}
-						>
+						<MdOutlineFileUpload className="upload-icon" />
+						<p className="upload-text">
 							Arrastra y suelta tu archivo aquí <br /> o haz clic
 							para seleccionar
 						</p>
-						<p
-							style={{
-								margin: "5px 0 0",
-								fontSize: "0.8em",
-								color: "#666",
-							}}
-						>
+						<p className="format-text">
 							Formatos soportados: JPG, PNG
 						</p>
 					</>
 				) : (
-					<div style={{ width: "100%", textAlign: "center" }}>
-						<div
-							style={{
-								position: "relative",
-								display: "inline-block",
-							}}
-						>
+					<div className="preview-container">
+						<div className="preview-image-container">
 							<img
 								src={previewUrl || ""}
 								alt="Preview"
-								style={{
-									maxWidth: "100%",
-									maxHeight: "150px",
-									borderRadius: "10px",
-								}}
+								className="preview-image"
 							/>
 							<button
 								type="button"
@@ -169,30 +131,14 @@ const FileUpload = ({ handleResult, handleSubmit, handleSetFile }: FileUploadPro
 									e.stopPropagation();
 									removeFile();
 								}}
-								style={{
-									position: "absolute",
-									top: "-10px",
-									right: "-10px",
-									background: "#ff4d4f",
-									borderRadius: "50%",
-									width: "24px",
-									height: "24px",
-									display: "flex",
-									justifyContent: "center",
-									alignItems: "center",
-									border: "none",
-									cursor: "pointer",
-									color: "white",
-								}}
+								className="remove-button"
 							>
 								<MdClose size={16} />
 							</button>
 						</div>
-						<div style={{ marginTop: "10px" }}>
-							<p style={{ margin: "5px 0", fontWeight: "bold" }}>
-								{file.name}
-							</p>
-							<p style={{ margin: "5px 0", color: "#666" }}>
+						<div className="file-info">
+							<p className="file-name">{file.name}</p>
+							<p className="file-size">
 								{formatFileSize(file.size)}
 							</p>
 						</div>
@@ -203,27 +149,12 @@ const FileUpload = ({ handleResult, handleSubmit, handleSetFile }: FileUploadPro
 			<button
 				type="submit"
 				disabled={!file || fetcher.state === "submitting"}
-				style={{
-					background: file ? "#1B6DDE" : "#cccccc",
-					padding: "10px 20px",
-					borderRadius: "15px",
-					border: "none",
-					fontSize: "0.8em",
-					color: "white",
-					width: "250px",
-					fontWeight: "bold",
-					fontFamily: "Inter",
-					marginTop: "15px",
-					cursor: file ? "pointer" : "not-allowed",
-				}}
+				className={`submit-button ${!file ? 'disabled' : ''}`}
 			>
 				{fetcher.state === "submitting" ? "Procesando..." : "Evaluar"}
 			</button>
-
-			
 		</Form>
 	);
 };
 
 export default FileUpload;
-

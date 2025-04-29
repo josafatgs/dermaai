@@ -1,0 +1,408 @@
+/* Estilos generales */
+.classifier-container {
+    display: flex;
+    flex-direction: column;
+    padding: 0;
+    margin: 0;
+    width: 100%;
+  }
+  
+  /* Estilos del encabezado */
+  .classifier-header {
+    width: 100%;
+    padding: 12px 24px;
+    margin: 0 auto;
+    height: auto;
+    min-height: 80px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 20px;
+    flex-shrink: 0;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+    background-color: white;
+    position: relative;
+    z-index: 10;
+  }
+  
+  .header-logo {
+    flex: 0 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .logo-img {
+    display: block;
+    object-fit: contain;
+    filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.1));
+  }
+  
+  .derma-logo {
+    width: 70px;
+    height: 70px;
+  }
+  
+  .itesm-logo {
+    width: 50px;
+    height: 50px;
+  }
+  
+  .educational-message {
+    flex: 1 1 auto;
+    max-width: 600px;
+    background-color: #f0f7ff;
+    border-radius: 12px;
+    padding: 10px 20px;
+    border: 1px solid #3A7BD5;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.05);
+  }
+  
+  .message-text {
+    text-align: center;
+    font-size: 0.85em;
+    color: #1B6DDE;
+    font-weight: 500;
+    line-height: 1.4;
+  }
+  
+  .message-highlight {
+    font-weight: 600;
+  }
+  
+  /* Estilos del contenido principal */
+  .classifier-content {
+    max-width: 1440px;
+    width: 100%;
+    display: grid;
+    grid-template-columns: 60% 40%;
+    margin: 0 auto;
+    margin-top: 20px;
+    padding-bottom: 20px;
+    gap: 20px;
+  }
+  
+  .results-section {
+    height: 100%;
+  }
+  
+  .history-section {
+    height: 100%;
+  }
+
+  .for-mobile{
+    display: none;
+  }
+
+  .for-desktop{
+    display: flex;
+  }
+  
+  /* Media queries para responsividad */
+  @media (max-width: 1200px) {
+    .classifier-content {
+      max-width: 95%;
+      padding: 0 15px;
+    }
+  }
+  
+  @media (max-width: 992px) {
+    .classifier-content {
+      grid-template-columns: 1fr;
+      gap: 30px;
+    }
+    
+    .history-section {
+      order: 2;
+    }
+    
+    .results-section {
+      order: 1;
+    }
+
+
+  }
+  
+  @media (max-width: 768px) {
+    .classifier-header {
+      padding: 10px 15px;
+      flex-direction: column;
+      height: auto;
+      gap: 15px;
+    }
+    
+    .header-logo {
+      margin: 5px 0;
+    }
+    
+    .derma-logo {
+      width: 60px;
+      height: 60px;
+    }
+    
+    .itesm-logo {
+      width: 45px;
+      height: 45px;
+    }
+    
+    .educational-message {
+      width: 100%;
+      max-width: 100%;
+      padding: 8px 15px;
+    }
+    
+    .message-text {
+      font-size: 0.8em;
+    }
+
+    .for-mobile{
+        display: flex;
+        align-items: center;
+        width: 100%;
+        justify-content: space-between;
+    }
+
+    .for-desktop{
+        display: none;
+      }
+
+  }
+  
+  @media (max-width: 576px) {
+    .classifier-header {
+      flex-direction: row;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+    
+    .header-logo:first-child {
+      order: 1;
+      flex: 0 1 50%;
+      justify-content: flex-start;
+    }
+    
+    .header-logo:last-child {
+      order: 2;
+      flex: 0 1 50%;
+      justify-content: flex-end;
+    }
+    
+    .educational-message {
+      order: 3;
+      margin-top: 10px;
+    }
+    
+    .classifier-content {
+      padding: 0 10px;
+    }
+
+    .for-mobile{
+        display: flex;
+        align-items: center;
+        width: 100%;
+        justify-content: space-between;
+    }
+
+    .for-desktop{
+        display: none;
+      }
+
+  }
+  
+  @media (max-width: 480px) {
+    .derma-logo {
+      width: 50px;
+      height: 50px;
+    }
+    
+    .itesm-logo {
+      width: 40px;
+      height: 40px;
+    }
+    
+    .message-text {
+      font-size: 0.75em;
+    }
+
+    .for-mobile{
+        display: flex;
+        align-items: center;
+        width: 100%;
+        justify-content: space-between;
+    }
+
+    .for-desktop{
+        display: none;
+      }
+  }
+  
+  /* Animaciones y transiciones */
+  .educational-message {
+    transition: all 0.3s ease;
+  }
+  
+  .logo-img {
+    transition: transform 0.3s ease;
+  }
+  
+  .logo-img:hover {
+    transform: scale(1.05);
+  }
+
+  /* Estilos para el contenedor de carga de archivos */
+.upload-container {
+    border-radius: 15px;
+    padding: 15px;
+    border: 2px dotted #3A7BD5;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    background-color: transparent;
+    position: relative;
+    cursor: pointer;
+    height: 100%;
+    margin: 10px;
+}
+
+.upload-container.drag-active {
+    border: 2px solid #3A7BD5;
+    background-color: #f0f7ff;
+}
+
+/* Estilos para el input de archivo oculto */
+.file-input {
+    display: none;
+}
+
+/* Icono de carga */
+.upload-icon {
+    font-size: 2em;
+    color: #3A7BD5;
+    margin-bottom: 10px;
+}
+
+/* Texto de instrucciones */
+.upload-text {
+    margin: 0;
+    color: #3A7BD5;
+    text-align: center;
+}
+
+/* Texto de formatos */
+.format-text {
+    margin: 5px 0 0;
+    font-size: 0.8em;
+    color: #666;
+}
+
+/* Contenedor de previsualización */
+.preview-container {
+    width: 100%;
+    text-align: center;
+}
+
+/* Contenedor de la imagen de previsualización */
+.preview-image-container {
+    position: relative;
+    display: inline-block;
+}
+
+/* Imagen de previsualización */
+.preview-image {
+    max-width: 100%;
+    max-height: 150px;
+    border-radius: 10px;
+}
+
+/* Botón para eliminar la imagen */
+.remove-button {
+    position: absolute;
+    top: -10px;
+    right: -10px;
+    background: #ff4d4f;
+    border-radius: 50%;
+    width: 24px;
+    height: 24px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: none;
+    cursor: pointer;
+    color: white;
+}
+
+/* Información del archivo */
+.file-info {
+    margin-top: 10px;
+}
+
+/* Nombre del archivo */
+.file-name {
+    margin: 5px 0;
+    font-weight: bold;
+}
+
+/* Tamaño del archivo */
+.file-size {
+    margin: 5px 0;
+    color: #666;
+}
+
+/* Botón de envío */
+.submit-button {
+    background: #1B6DDE;
+    padding: 10px 20px;
+    border-radius: 15px;
+    border: none;
+    font-size: 0.8em;
+    color: white;
+    width: 250px;
+    font-weight: bold;
+    font-family: Inter;
+    margin-top: 15px;
+    cursor: pointer;
+}
+
+/* Botón deshabilitado */
+.submit-button.disabled {
+    background: #cccccc;
+    cursor: not-allowed;
+}
+
+@media (max-width: 480px) {
+    .submit-button{
+        width: 100%;
+    }
+}
+
+@media (max-width: 576px) {
+    .submit-button{
+        width: 100%;
+    }
+}
+
+.cta-button {
+  height: fit-content;
+  background: #1B6DDE;
+  color: white;
+  padding: 8px 20px;
+  border-radius: 10px;
+  font-size: 14px;
+  display: flex;
+  align-items: center;
+  text-decoration: none;
+  transition: background-color 0.3s;
+}
+
+.cta-button:hover {
+  background: #2266c5;
+}
+
+.large-cta {
+  font-size: 16px;
+  align-self: flex-start;
+}
