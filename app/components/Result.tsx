@@ -9,6 +9,8 @@ interface LesionDescription {
   title: string;
   description: string;
   characteristics: string[];
+  what_causes_it: string[];
+  data_url: string;
 }
 
 const Result = ({ classificationResult, originalImage, base64Image }: { classificationResult: ClassificationResult; originalImage: string, base64Image: string }) => {
@@ -24,6 +26,7 @@ const Result = ({ classificationResult, originalImage, base64Image }: { classifi
       const newEntry = {
         imageUrl: file64Base, // or file.url if already uploaded
         fileName: file.name,
+        fileType: file.type,
         fileSize: file.size,
         timestamp: Date.now(),
         results: classificationResult // Assuming classificationResult has your scores
@@ -154,7 +157,7 @@ const Result = ({ classificationResult, originalImage, base64Image }: { classifi
           </p>
 
           <h4 className={"characteristicsTitle"}>
-            Características principales:
+            {(lesionDescription?.characteristics ?? []).length > 0 ? "Características principales:" : ""}
           </h4>
           <ul className={"characteristicsList"}>
             {lesionDescription?.characteristics.map((item: string, index: number) => (
@@ -163,6 +166,24 @@ const Result = ({ classificationResult, originalImage, base64Image }: { classifi
               </li>
             ))}
           </ul>
+
+          <h4 className={"characteristicsTitle"}>
+            {lesionDescription?.what_causes_it ? "Causas:": ""}
+          </h4>
+          <ul className={"characteristicsList"}>
+            {lesionDescription?.what_causes_it.map((item: string, index: number) => (
+              <li key={index} className={"characteristicsItem"}>
+                {item}
+              </li>
+            ))}
+          </ul>
+
+          <a
+            href={lesionDescription?.data_url}
+            target="_blank"
+            rel="noopener noreferrer"
+            className={"dataLink"}
+          >Leer Mas</a>
         </div>
       </div>
 

@@ -1,65 +1,87 @@
 {
-    "mancha": {
-      "title": "Mancha",
-      "description": "Lesión plana no palpable con cambio de coloración en la piel, <1cm de diámetro",
-      "characteristics": [
-        "Sin relieve",
-        "Bordes definidos o difusos",
-        "No altera textura de la piel"
-      ],
-      "diagnosticos_diferenciales": [
-        "Efélide (peca)",
-        "Lentigo",
-        "Melanoma in situ"
-      ],
-      "treatment": ""
-    },
-    
-    "pustula": {
-      "title": "Pústula",
-      "description": "Elevación epidérmica llena de pus, generalmente de origen infeccioso",
-      "characteristics": [
-        "Contenido purulento visible",
-        "Base eritematosa",
-        "Tamaño <5mm"
-      ],
-      "diagnosticos_diferenciales": [
-        "Foliculitis",
-        "Acné pustuloso",
-        "Impétigo"
-      ],
-      "treatment": ""
-    },
-  
-    "roncha": {
-      "title": "Roncha",
-      "description": "Lesión edematosa transitoria de la dermis, secundaria a liberación de histamina",
-      "characteristics": [
-        "Palpable",
-        "Pruriginosa",
-        "Duración <24h"
-      ],
-      "diagnosticos_diferenciales": [
-        "Urticaria",
-        "Picadura de insecto",
-        "Dermografismo"
-      ],
-      "treatment": ""
-    },
-  
-    "ampolla": {
-      "title": "Ampolla",
-      "description": "Elevación llena de líquido seroso entre capas de la epidermis",
-      "characteristics": [
-        "Contenido claro o hemorrágico",
-        "Tamaño >5mm",
-        "Puede ser tensa o flácida"
-      ],
-      "diagnosticos_diferenciales": [
-        "Quemadura de segundo grado",
-        "Dermatitis de contacto",
-        "Penfigoide ampollar"
-      ],
-      "treatment": ""
-    }
-  } 
+	"mancha": {
+		"title": "Mancha",
+		"description": "Son áreas donde el color de la piel es irregular con partes más claras o más oscuras. La piel moteada o veteada se refiere a cambios vasculares en la piel que ocasionan un aspecto manchado.",
+		"characteristics": [
+			"Cambios en la melanina, una sustancia producida en las células de la piel que le dan su color",
+			"Proliferación de bacterias u otros microorganismos en la piel",
+			"Cambios en los vasos sanguíneos (vasculares)",
+			"Inflamación debido a ciertas erupciones cutáneas"
+		],
+		"diagnosticos_diferenciales": [],
+		"what_causes_it": [
+			"Acantosis nigricans",
+			"Acné",
+			"Manchas de color café en leche",
+			"Cortaduras, raspaduras, heridas, picaduras de insectos, e infecciones menores de piel",
+			"Eritrasma",
+			"Melasma (cloasma)",
+			"Melanoma",
+			"Lunares (nevos), lunar de traje de baño o lunares gigantes",
+			"Melanocitosis dérmica",
+			"Pitiriasis alba",
+			"Radioterapia",
+			"Erupciones cutáneas",
+			"Sensibilidad al sol debido a una reacción a medicamentos o a ciertos medicamentos",
+			"Bronceado o quemadura solar",
+			"Tiña versicolor",
+			"Aplicación desigual de protector solar, lo cual hace que algunas áreas se quemen, unas se bronceen y otras permanezcan sin broncear",
+			"Vitiligo"
+		],
+		"treatment": "",
+		"data_url": "https://medlineplus.gov/spanish/ency/article/003224.htm"
+	},
+
+	"pustula": {
+		"title": "Pústula",
+		"description": "Las pústulas son, llenas de pus, llagas pequeñas, inflamadas similares a ampollas (lesiones) en la superficie de la piel. Las pústulas son comunes en personas con acné o foliculitis (inflamación del folículo piloso). Pueden aparecer en cualquier parte del cuerpo, mas frecuentes en las siguientes areas del cuerpo: cara, pecho, espalda y hombros. Las pústulas pueden ser dolorosas o causar picazón. Pueden aparecer solas o en grupos. Las pústulas pueden ser un signo de una infección. En algunos casos, no son infecciosas y están asociadas a la inflamación de la piel o a la toma de medicamentos. Deben ser examinadas por un proveedor de atención médica y pueden necesitar ser evaluadas (mediante cultivo) en busca de bacterias y hongos.",
+		"characteristics": [],
+		"diagnosticos_diferenciales": [],
+		"what_causes_it": [],
+		"treatment": "",
+		"data_url": "https://medlineplus.gov/spanish/ency/article/003234.htm"
+	},
+
+	"roncha": {
+		"title": "Roncha",
+		"description": "Son ronchas rojizas, elevadas y a menudo pruriginosas (que producen picazón) que aparecen en la superficie de la piel. Pueden ser una reacción alérgica a algún alimento o medicamento. También pueden presentarse sin una causa.",
+		"characteristics": [],
+		"what_causes_it": [
+			"Caspa de animales (en especial de los gatos)",
+			"Picaduras de insectos",
+			"Medicamentos",
+			"Polen",
+			"Mariscos, pescado, nueces, huevos, leche y otros alimentos"
+		],
+		"diagnosticos_diferenciales": [
+			"Urticaria",
+			"Picadura de insecto",
+			"Dermografismo"
+		],
+		"treatment": "",
+		"data_url": "https://medlineplus.gov/spanish/ency/article/000845.htm"
+	},
+
+	"ampolla": {
+		"title": "Ampolla",
+		"description": "Las ampollas son sacos llenos de líquido en la capa externa de la piel. Se forman debido al roce, calor o enfermedades de la piel. Son más comunes en las manos y los pies.Otro nombre para las ampollas es vesícula (generalmente para ampollas más pequeñas) y bula (para las más grandes).",
+		"characteristics": [],
+		"what_causes_it": [
+			"Quemaduras",
+			"Quemaduras de Sol",
+			"Congelación",
+			"Eccema",
+			"Reacciones alergicas",
+			"Hidra, roble, zumaque venenosos",
+			"Enfermedades virales",
+			"Infecciones de la piel"
+		],
+		"diagnosticos_diferenciales": [
+			"Quemadura de segundo grado",
+			"Dermatitis de contacto",
+			"Penfigoide ampollar"
+		],
+		"treatment": "",
+		"data_url": "https://medlineplus.gov/spanish/blisters.html"
+	}
+}

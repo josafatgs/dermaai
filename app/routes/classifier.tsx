@@ -4,6 +4,9 @@ import Result from "~/components/Result";
 import { useState } from "react";
 import { ClassificationResult } from "~/types/ClassificationResult";
 import "../styles/classifier.css";
+import Modal from "~/components/Modal";
+import FeedbackModal from "~/components/FeedbackModal";
+import { Link } from "@remix-run/react";
 
 export default function Classifier() {
   const [results, setResults] = useState<ClassificationResult | null>(null);
@@ -75,35 +78,51 @@ export default function Classifier() {
   };
 
 
- 
+  const [isModalOpen, setIsModalOpen] = useState(true);
+  const [ giveFeedBackOpen, setGiveFeedBackOpen ] = useState(false);
+
+  const handleFeedbackSubmit = (feedback: {
+    satisfaction: number | null;
+    correctClassification: string | null;
+    actualClassification: string | null;
+  }) => {
+    console.log("Feedback recibido:", feedback);
+    // Aquí puedes enviar el feedback a tu backend o servicio de análisis
+  };
 
   return (
     <div className="classifier-container">
       <header className="classifier-header">
         {/* Logo izquierdo */}
         <div className="header-logo for-desktop">
+          <Link to={"/"}>
+            <img
+              src="/derma-bg-remo.png"
+              alt="Dermatoss Logo"
+              className="logo-img derma-logo"
+            />
+          </Link>
+        </div>
+
+		<div className="for-mobile">
+			<div className="header-logo">
+        <Link to={"/"}>
           <img
             src="/derma-bg-remo.png"
             alt="Dermatoss Logo"
             className="logo-img derma-logo"
           />
-        </div>
-
-		<div className="for-mobile">
-			<div className="header-logo">
-			<img
-				src="/derma-bg-remo.png"
-				alt="Dermatoss Logo"
-				className="logo-img derma-logo"
-			/>
+        </Link>
 			</div>
 
 			<div className="header-logo">
-			<img
-				src="/Logo_del_ITESM.svg"
-				alt="ITESM Logo"
-				className="logo-img itesm-logo"
-			/>
+			<Link to={"/"}>
+        <img
+          src="/Logo_del_ITESM.svg"
+          alt="ITESM Logo"
+          className="logo-img itesm-logo"
+        />
+      </Link>
 			</div>
 			
 		</div>
@@ -117,11 +136,13 @@ export default function Classifier() {
 
         {/* Logo derecho */}
         <div className="header-logo for-desktop">
-          <img
-            src="/Logo_del_ITESM.svg"
-            alt="ITESM Logo"
-            className="logo-img itesm-logo"
-          />
+          <Link to={"/"}>
+            <img
+              src="/Logo_del_ITESM.svg"
+              alt="ITESM Logo"
+              className="logo-img itesm-logo"
+            />
+          </Link>
         </div>
       </header>
 
@@ -136,7 +157,10 @@ export default function Classifier() {
               />
               <button
                 className="cta-button" style={{ margin: "20px"}}
-                onClick={clearResults}
+                onClick={() => {
+                  clearResults();
+                  setGiveFeedBackOpen(true);
+                }}
               >
                 Clasificar otra imagen
               </button>
@@ -152,6 +176,28 @@ export default function Classifier() {
           <ClasificationHistory />
         </div>
       </main>
+
+      <Modal
+        isOpen={isModalOpen}
+        onClose={() => setIsModalOpen(false)}
+        title="¿Como usar la herramienta?"
+      >
+        <p>Mira lo sencillo que es usar nuestra app!</p>
+        <div className="mt-4">
+          <button
+            onClick={() => setIsModalOpen(false)}
+            className="px-4 py-2 text-white bg-[#3A7BD5] rounded hover:bg-[#3A7BD5]"
+          >
+            Cerrar
+          </button>
+        </div>
+      </Modal>
+
+      <FeedbackModal
+        isOpen={giveFeedBackOpen}
+        onClose={() => setGiveFeedBackOpen(false)}
+        onSubmit={handleFeedbackSubmit}
+      />
     </div>
   );
 
